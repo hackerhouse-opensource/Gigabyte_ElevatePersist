@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "atiadlxy", "atiadlxy\atiadlxy.vcxproj", "{95EDA706-1158-4212-B981-643231187085}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gigabyte_ElevatePersist", "Gigabyte_ElevatePersist\Gigabyte_ElevatePersist.vcxproj", "{2E7C3A5E-E528-429B-8BF1-550450A1E3D1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{95EDA706-1158-4212-B981-643231187085} = {95EDA706-1158-4212-B981-643231187085}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45201BC7-B4D8-4FB1-B44E-C5667B27C3FD}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95EDA706-1158-4212-B981-643231187085}.Debug|x86.ActiveCfg = Debug|Win32
+		{95EDA706-1158-4212-B981-643231187085}.Debug|x86.Build.0 = Debug|Win32
+		{95EDA706-1158-4212-B981-643231187085}.Release|x86.ActiveCfg = Release|Win32
+		{95EDA706-1158-4212-B981-643231187085}.Release|x86.Build.0 = Release|Win32
+		{2E7C3A5E-E528-429B-8BF1-550450A1E3D1}.Debug|x86.ActiveCfg = Debug|Win32
+		{2E7C3A5E-E528-429B-8BF1-550450A1E3D1}.Debug|x86.Build.0 = Debug|Win32
+		{2E7C3A5E-E528-429B-8BF1-550450A1E3D1}.Release|x86.ActiveCfg = Release|Win32
+		{2E7C3A5E-E528-429B-8BF1-550450A1E3D1}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D57B4EF-9F44-4B85-9673-69C2A2CC9CC1}
+	EndGlobalSection
+EndGlobal
